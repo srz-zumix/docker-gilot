@@ -7,8 +7,8 @@ Dockerized [gilot](https://github.com/hirokidaichi/gilot)
 
 e.g.
 
-> docker run --rm -it -v $(pwd):/repo gilot log . | docker run --rm -i -v $(pwd):/repo gilot plot -o gilot.png
+> docker run --rm -it -v $(pwd):/repo srzzumix/gilot log . | docker run --rm -i -v $(pwd):/repo srzzumix/gilot plot -o gilot.png
 
-> docker run --rm -it -v $(pwd):/repo gilot log . --full | docker run --rm -i -v $(pwd):/repo gilot hotspot
+> docker run --rm -it -v $(pwd):/repo srzzumix/gilot log . --full | docker run --rm -i -v $(pwd):/repo srzzumix/gilot hotspot
 
-> docker run --rm -it -v $(pwd):/repo gilot log . --full | docker run --rm -i -v $(pwd):/repo gilot hotgraph -o gilot-hot.png
+> docker run --rm -it -v $(pwd):/repo srzzumix/gilot log . --full | docker run --rm -i -v $(pwd):/repo srzzumix/gilot hotgraph -o gilot-hot.png
