@@ -1,0 +1,8 @@
+#!/bin/bash
+set -eu
+
+if [ "${DOCKER_TAG}" = "latest" ]; then
+  GILOT_VERSION=$(docker run --rm ${IMAGE_NAME} --version)
+  docker tag ${IMAGE_NAME} ${DOCKER_REPO}:${GILOT_VERSION}
+  docker push ${DOCKER_REPO}:${GILOT_VERSION}
+fi
