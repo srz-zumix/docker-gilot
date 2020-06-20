@@ -7,4 +7,6 @@ RUN apk update && \
     pip install scipy==1.3.1 && \
     pip install gilot
 
+VOLUME [ "/repo" ]
+WORKDIR /repo
 ENTRYPOINT [ "gilot" ]
