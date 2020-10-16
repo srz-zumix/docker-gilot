@@ -2,8 +2,12 @@
 set -eu
 
 if [ "${DOCKER_TAG}" = "latest" ]; then
-  # GILOT_VERSION=$(docker run --rm ${IMAGE_NAME} --version)
-  GILOT_VERSION=0.2.0
-  docker tag ${IMAGE_NAME} ${DOCKER_REPO}:${GILOT_VERSION}
-  docker push ${DOCKER_REPO}:${GILOT_VERSION}
+  GILOT_VERSION=$(docker run --rm --entrypoint pip ${IMAGE_NAME} freeze | grep gilot | sed 's/.*==\([0-9.]*\)/\1/')
+  echo ${GILOT_VERSION}
+  if [ "${GILOT_VERSION}" = "" ]; then
+    exit 1
+  else
+    docker tag ${IMAGE_NAME} ${DOCKER_REPO}:${GILOT_VERSION}
+    docker push ${DOCKER_REPO}:${GILOT_VERSION}
+  fi
 fi
