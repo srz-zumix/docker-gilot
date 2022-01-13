@@ -1,0 +1,27 @@
+name: Docker Build
+on: workflow_dispatch
+
+jobs:
+  push_to_registries:
+    runs-on: ubuntu-latest
+    environment: dockerhub
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+      - name: Push to Docker Hub
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: srzzumix/lizard:latest
+      - name: Push to version tag
+        env:
+          DOCKER_TAG: latest
+          IMAGE_NAME: srzzumix/gilot:latest
+          DOCKER_REPO: srzzumix/gilot
+        run: |
+          ./hooks/post_push
