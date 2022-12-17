@@ -7,17 +7,17 @@ jobs:
     environment: dockerhub
     steps:
       - name: Check out the repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Log in to Docker Hub
         uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
       - name: Push to Docker Hub
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           push: true
-          tags: srzzumix/lizard:latest
+          tags: srzzumix/gilot:latest
       - name: Push to version tag
         env:
           DOCKER_TAG: latest
